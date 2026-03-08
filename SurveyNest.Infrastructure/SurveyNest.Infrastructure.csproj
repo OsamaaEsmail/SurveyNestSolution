@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyNest.Application\SurveyNest.Application.csproj" />
+    <ProjectReference Include="..\SurveyNest.BuildingBlocks\SurveyNest.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\SurveyNest.Domain\SurveyNest.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

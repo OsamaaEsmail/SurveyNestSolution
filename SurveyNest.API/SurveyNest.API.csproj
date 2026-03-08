@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SurveyNest.Application\SurveyNest.Application.csproj" />
+    <ProjectReference Include="..\SurveyNest.BuildingBlocks\SurveyNest.BuildingBlocks.csproj" />
+    <ProjectReference Include="..\SurveyNest.Infrastructure\SurveyNest.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

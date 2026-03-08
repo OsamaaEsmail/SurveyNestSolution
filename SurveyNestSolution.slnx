@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="SurveyNest.API/SurveyNest.API.csproj" />
+  <Project Path="SurveyNest.Application/SurveyNest.Application.csproj" />
+  <Project Path="SurveyNest.BuildingBlocks/SurveyNest.BuildingBlocks.csproj" />
+  <Project Path="SurveyNest.Domain/SurveyNest.Domain.csproj" />
+  <Project Path="SurveyNest.Infrastructure/SurveyNest.Infrastructure.csproj" />
+</Solution>
