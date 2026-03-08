@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.14.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Caching.Hybrid" Version="9.3.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.6.8" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\SurveyNest.Application\SurveyNest.Application.csproj" />
     <ProjectReference Include="..\SurveyNest.BuildingBlocks\SurveyNest.BuildingBlocks.csproj" />
     <ProjectReference Include="..\SurveyNest.Domain\SurveyNest.Domain.csproj" />
