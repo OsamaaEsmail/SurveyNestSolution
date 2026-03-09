@@ -1,5 +1,8 @@
-﻿namespace SurveyNest.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
 
+namespace SurveyNest.Domain.Entities;
+
+[Owned]
 public class AuditableEntity
 {
     public string CreatedById { get; set; } = string.Empty;
