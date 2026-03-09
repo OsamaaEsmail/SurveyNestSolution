@@ -14,8 +14,8 @@ public sealed class Question : AuditableEntity
 
 
     public Poll Poll { get; set; } = default!;
-    public ICollection<Answer> Answers { get; set; } = [];
+    public ICollection<Answer> Answers { get; set; } = []; //One To Meny "only one Question to many Answers"
 
-    public ICollection<VoteAnswer> VoteAnswers { get; set; } = [];
+    public ICollection<VoteAnswer> VoteAnswers { get; set; } = []; //One To Meny "only one Answers to many VoteAnswers"
 
 }

@@ -13,6 +13,6 @@ public class Answer
     public bool IsActive { get; set; } = true;
 
 
-    public Question Question { get; set; } = default!;
+    public Question Question { get; set; } = default!;  //Meny To One " Meny Answers and One Question "
 
 }

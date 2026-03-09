@@ -13,8 +13,8 @@ public sealed class Vote
 
 
 
-    public Poll Poll { get; set; } = default!;
-    public ApplicationUser User { get; set; } = default!;
+    public Poll Poll { get; set; } = default!; // Meny to One "Vote (Many) → Poll (One)"
+    public ApplicationUser User { get; set; } = default!; // Meny To One "Meny vote and have one user  "
 
-    public ICollection<VoteAnswer> VoteAnswers { get; set; } = [];
+    public ICollection<VoteAnswer> VoteAnswers { get; set; } = []; // One to meny "One Vote has many VoteAnswers"
 }
