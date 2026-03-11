@@ -1,6 +1,4 @@
-﻿
-
-namespace SurveyNest.Application.DtoContracts.Users;
+﻿namespace SurveyNest.Application.DtoContracts.Users;
 
 public record ForgetPasswordRequest
 (
