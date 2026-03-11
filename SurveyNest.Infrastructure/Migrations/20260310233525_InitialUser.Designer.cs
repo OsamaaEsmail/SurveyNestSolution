@@ -12,8 +12,8 @@ using SurveyNest.Infrastructure.Persistence;
 namespace SurveyNest.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260309225036_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260310233525_InitialUser")]
+    partial class InitialUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -400,7 +400,7 @@ namespace SurveyNest.Infrastructure.Migrations
                         {
                             Id = "2b803897-8678-4671-9aef-dbb37af3f32f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = " c1afc9b9a86847fdbc31768262074c54 ",
+                            ConcurrencyStamp = "c1afc9b9a86847fdbc31768262074c54",
                             Email = "admin@survey-basket.com",
                             EmailConfirmed = true,
                             FirstName = "Survey Basket",

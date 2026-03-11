@@ -1,5 +1,7 @@
 ﻿
 
+using System.Reflection;
+
 namespace SurveyNest.Domain.Consts;
 
 public static class Permissions
@@ -28,8 +30,12 @@ public static class Permissions
 
 
 
-    public static IList<string?> GetAllPermissions() =>
-      typeof(Permissions).GetFields().Select(x => x.GetValue(x) as string).ToList();
+    public static IList<string> GetAllPermissions() =>
+     typeof(Permissions)
+         .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly)
+         .Select(x => x.GetValue(null) as string)
+         .Where(x => x is not null)
+         .ToList()!;
 
 
 

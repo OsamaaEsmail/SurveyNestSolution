@@ -25,4 +25,8 @@
     <ProjectReference Include="..\SurveyNest.Domain\SurveyNest.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tamplates\" />
+  </ItemGroup>
+
 </Project>

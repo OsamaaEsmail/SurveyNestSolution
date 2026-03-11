@@ -13,6 +13,7 @@ using SurveyNest.Domain.Entities;
 using SurveyNest.Infrastructure.Authentication;
 using SurveyNest.Infrastructure.Persistence;
 using SurveyNest.Infrastructure.Seeding;
+using SurveyNest.Infrastructure.Settings;
 using System.Text;
 
 namespace SurveyNest.Infrastructure;
@@ -34,6 +35,11 @@ public static class InfrastructureDependencyInjection
         // Application Services
 
         //TO Do Infrecess
+
+        services.AddOptions<MailSettings>()
+            .BindConfiguration(nameof(MailSettings))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
 
 
 

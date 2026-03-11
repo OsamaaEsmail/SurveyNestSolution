@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SurveyNest.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -348,7 +348,7 @@ namespace SurveyNest.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IsDisabled", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "2b803897-8678-4671-9aef-dbb37af3f32f", 0, " c1afc9b9a86847fdbc31768262074c54 ", "admin@survey-basket.com", true, "Survey Basket", false, "Admin", false, null, "ADMIN@SURVEY-BASKET.COM", "ADMIN@SURVEY-BASKET.COM", "AQAAAAIAAYagAAAAEOVj7lCai9YS4x7ireWNHL38s0A+s18ivducM5tirhatpzkEGyJKjt4/lsI5VZtR/A==", null, false, "446CFAB0DE06497199C55E889FABC8C9", false, "admin@survey-basket.com" });
+                values: new object[] { "2b803897-8678-4671-9aef-dbb37af3f32f", 0, "c1afc9b9a86847fdbc31768262074c54", "admin@survey-basket.com", true, "Survey Basket", false, "Admin", false, null, "ADMIN@SURVEY-BASKET.COM", "ADMIN@SURVEY-BASKET.COM", "AQAAAAIAAYagAAAAEOVj7lCai9YS4x7ireWNHL38s0A+s18ivducM5tirhatpzkEGyJKjt4/lsI5VZtR/A==", null, false, "446CFAB0DE06497199C55E889FABC8C9", false, "admin@survey-basket.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoleClaims",
