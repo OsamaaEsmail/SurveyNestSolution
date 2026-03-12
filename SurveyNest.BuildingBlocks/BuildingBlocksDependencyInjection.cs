@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SurveyNest.Application.Extensions;
 using SurveyNest.BuildingBlocks.SharedExtensions;
 using System.Threading.RateLimiting;
@@ -15,6 +16,7 @@ public static class BuildingBlocksDependencyInjection
     {
         services.AddAddRateLimiterConfig();
         services.AddCorsConfig(configuration);
+        services.AddHealthChecksConfig(configuration);
         return services;
     }
 
@@ -78,6 +80,19 @@ public static class BuildingBlocksDependencyInjection
                     .WithOrigins(configuration.GetSection("AllowedOrigins").Get<string[]>()!);
             });
         });
+        return services;
+    }
+
+    private static IServiceCollection AddHealthChecksConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHealthChecks()
+            .AddSqlServer(
+                connectionString: configuration.GetConnectionString("DefaultConnection")!,
+                name: "Database",
+                failureStatus: HealthStatus.Unhealthy,
+                tags: ["db", "sql"]
+            );
+
         return services;
     }
 }
