@@ -63,6 +63,7 @@ public static class InfrastructureDependencyInjection
 
 
         services.AddAuthIdentityConfig(configuration)
+
          .AddJwtConfig(configuration);
         
 

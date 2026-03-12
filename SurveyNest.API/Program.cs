@@ -1,3 +1,4 @@
+using SurveyNest.BuildingBlocks;
 using SurveyNest.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 //DependencyInjection
 
 builder.Services.AddInfrastructureServices(builder.Configuration);
+
+builder.Services.AddBuildingBlocksService(builder.Configuration);
 
 // Add services to the container.
 
@@ -26,6 +29,10 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+app.UseRateLimiter();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
