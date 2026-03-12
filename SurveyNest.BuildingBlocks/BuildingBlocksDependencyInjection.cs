@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using SurveyNest.Application.Extensions;
+using SurveyNest.BuildingBlocks.Middleware;
 using SurveyNest.BuildingBlocks.SharedExtensions;
 using System.Threading.RateLimiting;
 
@@ -17,7 +18,17 @@ public static class BuildingBlocksDependencyInjection
         services.AddAddRateLimiterConfig();
         services.AddCorsConfig(configuration);
         services.AddHealthChecksConfig(configuration);
+
+
+
+        services.AddExceptionHandler<GlobalExceptionHandler>();
+        services.AddProblemDetails();
+
         return services;
+
+
+
+
     }
 
     //==================================Private Methods======================================//

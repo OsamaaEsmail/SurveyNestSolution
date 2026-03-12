@@ -1,5 +1,6 @@
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Serilog;
 using SurveyNest.API;
 using SurveyNest.Application;
 using SurveyNest.BuildingBlocks;
@@ -7,22 +8,17 @@ using SurveyNest.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-//DependencyInjection
-
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration)
+);
+// DependencyInjection
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
-
 builder.Services.AddBuildingBlocksService(builder.Configuration);
-
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-//builder.Services.AddOpenApi();
 builder.Services.AddApiServices();
-var app = builder.Build();
 
+var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
@@ -42,18 +38,14 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-
-
-app.UseHttpsRedirection();
-app.UseCors();
-
-app.UseRateLimiter();
-
-app.UseAuthentication();
-
-app.UseAuthorization();
-
-app.MapControllers();
+app.UseExceptionHandler();       // 1️
+app.UseSerilogRequestLogging();  // 2
+app.UseHttpsRedirection();       // 3
+app.UseCors();                   // 4
+app.UseRateLimiter();            // 5
+app.UseAuthentication();         // 6
+app.UseAuthorization();          // 7
+app.MapControllers();            // 8
 
 // HealthCheck Endpoints
 app.MapHealthChecks("/health", new HealthCheckOptions
@@ -66,6 +58,5 @@ app.MapHealthChecks("/health/db", new HealthCheckOptions
     Predicate = x => x.Tags.Contains("db"),
     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
 });
-
 
 app.Run();
