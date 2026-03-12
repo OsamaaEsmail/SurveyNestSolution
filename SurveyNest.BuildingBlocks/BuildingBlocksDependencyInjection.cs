@@ -14,6 +14,7 @@ public static class BuildingBlocksDependencyInjection
     public static IServiceCollection AddBuildingBlocksService(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAddRateLimiterConfig();
+        services.AddCorsConfig(configuration);
         return services;
     }
 
@@ -61,6 +62,22 @@ public static class BuildingBlocksDependencyInjection
             });
         });
 
+        return services;
+    }
+
+
+    private static IServiceCollection AddCorsConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(configuration.GetSection("AllowedOrigins").Get<string[]>()!);
+            });
+        });
         return services;
     }
 }

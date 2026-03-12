@@ -30,6 +30,8 @@ public static class InfrastructureDependencyInjection
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
+        services.AddHybridCache();
+
         // HttpContext
         services.AddHttpContextAccessor();
 
@@ -56,6 +58,7 @@ public static class InfrastructureDependencyInjection
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IEmailSender, EmailService>();
 
+        services.AddScoped<ICacheService, CacheService>();
         // Seeders
         services.AddScoped<DefaultRolesSeeder>();
         services.AddScoped<DefaultUsersSeeder>();
