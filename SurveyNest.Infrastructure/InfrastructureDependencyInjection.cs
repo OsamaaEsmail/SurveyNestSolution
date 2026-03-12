@@ -4,6 +4,7 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +14,7 @@ using SurveyNest.Domain.Entities;
 using SurveyNest.Infrastructure.Authentication;
 using SurveyNest.Infrastructure.Persistence;
 using SurveyNest.Infrastructure.Seeding;
+using SurveyNest.Infrastructure.Services;
 using SurveyNest.Infrastructure.Settings;
 using System.Text;
 
@@ -34,7 +36,7 @@ public static class InfrastructureDependencyInjection
 
         // Application Services
 
-        //TO Do Infrecess
+       
 
         services.AddOptions<MailSettings>()
             .BindConfiguration(nameof(MailSettings))
@@ -42,7 +44,17 @@ public static class InfrastructureDependencyInjection
             .ValidateOnStart();
 
 
-
+        //TO Do Infrecess
+        // Application Services
+        services.AddScoped<IPollService, PollService>();
+        services.AddScoped<IQuestionService, QuestionService>();
+        services.AddScoped<IVoteService, VoteService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IResultService, ResultService>();
+        services.AddScoped<IRoleService, RoleService>();
+        services.AddScoped<INotificationService, NotificationService>();
+        services.AddScoped<IEmailSender, EmailService>();
 
         // Seeders
         services.AddScoped<DefaultRolesSeeder>();
