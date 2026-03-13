@@ -1,3 +1,5 @@
+using Hangfire;
+using HangfireBasicAuthenticationFilter;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Serilog;
@@ -5,6 +7,7 @@ using SurveyNest.API;
 using SurveyNest.Application;
 using SurveyNest.BuildingBlocks;
 using SurveyNest.Infrastructure;
+using SurveyNest.Infrastructure.Seeding;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +39,28 @@ if (app.Environment.IsDevelopment())
             );
         }
     });
+}
+
+app.UseHangfireDashboard("/jobs", new DashboardOptions
+{
+    Authorization =
+    [
+        new HangfireCustomBasicAuthenticationFilter
+        {
+            User = app.Configuration.GetValue<string>("HangfireSettings:Username"),
+            Pass = app.Configuration.GetValue<string>("HangfireSettings:Password")
+        }
+    ],
+    DashboardTitle = "SurveyNest Dashboard"
+});
+
+// ─── Seed Data ────────────────────────────────────────────────────────────
+using (var scope = app.Services.CreateScope())
+{
+    var usersSeeder = scope.ServiceProvider.GetRequiredService<DefaultUsersSeeder>();
+    var dataSeeder = scope.ServiceProvider.GetRequiredService<DefaultDataSeeder>();
+    await usersSeeder.SeedAsync();
+    await dataSeeder.SeedAsync();
 }
 
 app.UseExceptionHandler();       // 1️

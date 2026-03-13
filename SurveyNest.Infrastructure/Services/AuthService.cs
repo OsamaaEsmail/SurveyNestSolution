@@ -1,4 +1,5 @@
 ﻿
+using Hangfire;
 using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -330,7 +331,7 @@ public class AuthService(UserManager<ApplicationUser> userManager,
         );
 
 
-       // BackgroundJob.Enqueue(() => _emailSender.SendEmailAsync(user.Email!, "✅ Survey Basket: Email Confirmation", emailBody));
+         BackgroundJob.Enqueue(() => _emailSender.SendEmailAsync(user.Email!, "✅ Survey Basket: Email Confirmation", emailBody));
 
         await Task.CompletedTask;
     }
@@ -350,7 +351,7 @@ public class AuthService(UserManager<ApplicationUser> userManager,
             }
         );
 
-      //  BackgroundJob.Enqueue(() => _emailSender.SendEmailAsync(user.Email!, "✅ Survey Basket: Change Password", emailBody));
+      BackgroundJob.Enqueue(() => _emailSender.SendEmailAsync(user.Email!, "✅ Survey Basket: Change Password", emailBody));
 
         await Task.CompletedTask;
     }

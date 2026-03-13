@@ -1,4 +1,5 @@
-﻿using Mapster;
+﻿using Hangfire;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using SurveyNest.Application.DtoContracts.Polls;
 using SurveyNest.Application.Interfaces;
@@ -115,8 +116,8 @@ public class PollService(ApplicationDbContext context, INotificationService noti
         await _context.SaveChangesAsync(cancellationToken);
 
         // TODO: uncomment when Hangfire is configured
-        // if (poll.IsPublished && poll.StartsAt == DateOnly.FromDateTime(DateTime.UtcNow))
-        //     BackgroundJob.Enqueue(() => _notificationService.SendNewPollsNotification(poll.Id));
+         if (poll.IsPublished && poll.StartsAt == DateOnly.FromDateTime(DateTime.UtcNow))
+            BackgroundJob.Enqueue(() => _notificationService.SendNewPollsNotification(poll.Id));
 
         return Result.Success();
     }

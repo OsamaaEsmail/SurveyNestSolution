@@ -2,6 +2,8 @@
 
 
 
+using Hangfire;
+using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -67,8 +69,9 @@ public static class InfrastructureDependencyInjection
 
         services.AddAuthIdentityConfig(configuration)
 
-         .AddJwtConfig(configuration);
-        
+         .AddJwtConfig(configuration)
+         .AddBackgroundJobsConfig(configuration);
+
 
 
         return services;
@@ -135,7 +138,24 @@ public static class InfrastructureDependencyInjection
         return services;
     }
 
-
+    private static IServiceCollection AddBackgroundJobsConfig(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddHangfire(config => config
+            .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+            .UseSimpleAssemblyNameTypeSerializer()
+            .UseRecommendedSerializerSettings()
+            .UseSqlServerStorage(
+                configuration.GetConnectionString("HangfireConnection"),
+                new SqlServerStorageOptions
+                {
+                    // ✅ بيعمل الـ Database تلقائياً
+                    PrepareSchemaIfNecessary = true
+                }
+            )
+        );
+        services.AddHangfireServer();
+        return services;
+    }
 
 
 
