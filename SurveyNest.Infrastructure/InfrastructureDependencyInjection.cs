@@ -5,6 +5,7 @@
 using Hangfire;
 using Hangfire.SqlServer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using SurveyNest.Application.Interfaces;
 using SurveyNest.Domain.Entities;
 using SurveyNest.Infrastructure.Authentication;
+using SurveyNest.Infrastructure.Authentication.Filters;
 using SurveyNest.Infrastructure.Persistence;
 using SurveyNest.Infrastructure.Seeding;
 using SurveyNest.Infrastructure.Services;
@@ -77,7 +79,7 @@ public static class InfrastructureDependencyInjection
         return services;
 
 
-    } 
+    }
 
 
     //==================================Privte Methods======================================//
@@ -100,7 +102,12 @@ public static class InfrastructureDependencyInjection
             })
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders();
+
+        services.AddTransient<IAuthorizationHandler, PermissionAuthorizationHandler>();
+        services.AddTransient<IAuthorizationPolicyProvider, PermissionAuthorizationPolicyProvider>();
         return services;
+
+
 
 
     }
